@@ -44,3 +44,15 @@ After the simulation, display the final position and direction of each car, or i
 **Restart or Exit:**
 
 Provide the user with an option to start over or exit.
+
+
+
+### To run the application
+
+Simply start the command:  
+
+```
+python main.py
+```
+
+Alternatively:  
