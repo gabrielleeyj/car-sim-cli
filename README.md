@@ -54,5 +54,3 @@ Simply start the command:
 ```
 python main.py
 ```
-
-Alternatively:  
