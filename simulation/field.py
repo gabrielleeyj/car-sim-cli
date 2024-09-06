@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 
 FIELD_SIZE_FILE = "field_size.json"
 
-
 class Field:
     def __init__(self, width, height):
         self.width = width
@@ -16,10 +15,10 @@ class Field:
         # Check for multiple cars at the same position
         for existing_car in self.cars:
             if existing_car.position == car.position:
-                new_x = click.prompt(f"Car {car.name} input new x position")
-                new_y = click.prompt(f"Car {car.name} input new y position")
-                car.position[0] = int(new_x)
-                car.position[1] = int(new_y)
+                click.echo(f"Car {car.name} has the same position as {existing_car.name}.")
+                new_x = click.prompt(f"Car {car.name} input new x position", type=int)
+                new_y = click.prompt(f"Car {car.name} input new y position", type=int)
+                car.position = (new_x, new_y)  # Create a new tuple with updated values
 
         self.cars.append(car)
 
@@ -28,9 +27,10 @@ class Field:
         for car in self.cars:
             if car.position in positions:
                 raise ValueError(
-                    f"Collision detected at initial position {car.position} between {car.name} and {positions[car.position].name}.")
+                    f"Collision detected at position {car.position} between {car.name} and {positions[car.position].name}.")
             positions[car.position] = car
 
+    @staticmethod
     def load_field_size():
         if os.path.exists(FIELD_SIZE_FILE):
             with open(FIELD_SIZE_FILE, 'r') as file:
@@ -38,10 +38,12 @@ class Field:
                 return data.get('width'), data.get('height')
         return None, None
 
+    @staticmethod
     def save_field_size(width, height):
         with open(FIELD_SIZE_FILE, 'w') as file:
             json.dump({'width': width, 'height': height}, file)
 
+    @staticmethod
     def plot_car_positions(field, cars):
         fig, ax = plt.subplots()
 
@@ -62,3 +64,4 @@ class Field:
         plt.ylabel('Y')
         plt.title('Final Positions of Cars on the Field')
         plt.show()
+
