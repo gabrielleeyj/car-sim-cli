@@ -1,3 +1,4 @@
+import click
 import json
 import os
 import matplotlib.pyplot as plt
@@ -15,8 +16,10 @@ class Field:
         # Check for multiple cars at the same position
         for existing_car in self.cars:
             if existing_car.position == car.position:
-                raise ValueError(
-                    f"Car {car.name} has the same starting position as car {existing_car.name}.")
+                new_x = click.prompt(f"Car {car.name} input new x position")
+                new_y = click.prompt(f"Car {car.name} input new y position")
+                car.position[0] = int(new_x)
+                car.position[1] = int(new_y)
 
         self.cars.append(car)
 

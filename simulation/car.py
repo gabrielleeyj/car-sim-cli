@@ -9,7 +9,7 @@ class Car:
 
     def __init__(self, name, x, y, direction, commands):
         self.name = name
-        self.position = (x, y)
+        self.position = [x, y]
         self.direction = direction
         self.commands = commands
         self.collided = False
@@ -35,3 +35,7 @@ class Car:
     def validate_command(self, command):
         if command not in ['L', 'R', 'F']:
             raise ValueError(f"Invalid command '{command}' for car {self.name}")
+
+    def validate_position(self):
+        if self.position[0] < 0 or self.position[1] < 0:
+            raise ValueError(f"Position is incorrect for car {self.name}")
